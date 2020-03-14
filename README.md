@@ -2,7 +2,7 @@ MentX Core integration/staging tree
 =====================================
 
 Copyright (c) 2009-2020 Bitcoin Developers  
-Copyright (c) 2019-2020 Mentos Developers
+Copyright (c) 2019-2020 Mentos Developers 
 Copyright (c) 2020- MentX Developers
 
 What is MentX?
