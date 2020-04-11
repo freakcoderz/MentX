@@ -193,11 +193,11 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     rpcConsole = new RPCConsole(this);
     //connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole, SLOT(show()));
 
-    connect(openInfoAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showInfo()));
-    connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showConsole()));
-    connect(openNetworkAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showNetwork()));
-    connect(openPeersAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showPeers()));
-    connect(openConfEditorAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showConfEditor()));
+    connect(openInfoAction, SIGNAL(triggered()), rpcConsole, SLOT(showInfo()));
+    connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole, SLOT(showConsole()));
+    connect(openNetworkAction, SIGNAL(triggered()), rpcConsole, SLOT(showNetwork()));
+    connect(openPeersAction, SIGNAL(triggered()), rpcConsole, SLOT(showPeers()));
+    connect(openConfEditorAction, SIGNAL(triggered()), rpcConsole, SLOT(showConfEditor()));
 
     // Clicking on "Verify Message" in the address book sends you to the verify message tab
     connect(addressBookPage, SIGNAL(verifyMessage(QString)), this, SLOT(gotoVerifyMessageTab(QString)));
