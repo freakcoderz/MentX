@@ -584,7 +584,7 @@ void BitcoinGUI::githubsourceActionClicked()
 
 void BitcoinGUI::whitepaperActionClicked()
 {
-        QDesktopServices::openUrl(QUrl("https://wixlabs-pdf-dev.appspot.com/assets/pdfjs/web/viewer.html?file=%2Fpdfproxy%3Finstance%3DNp2mtlEkOQdAs0E5KvMAbs27yQRZvMIEpcKWorC1XZI.eyJpbnN0YW5jZUlkIjoiMjlhZTljNDUtNWM3YS00NTMwLWIzMmItOWQ1YzQ5NzM5MGFjIiwiYXBwRGVmSWQiOiIxM2VlMTBhMy1lY2I5LTdlZmYtNDI5OC1kMmY5ZjM0YWNmMGQiLCJtZXRhU2l0ZUlkIjoiNjMyMzBkYjAtNTUwZS00NTAxLWFiNzQtNzEzNTViZTNhNGNhIiwic2lnbkRhdGUiOiIyMDIwLTA0LTExVDAzOjE4OjA5LjkyMVoiLCJkZW1vTW9kZSI6ZmFsc2UsImFpZCI6ImY5YjhkNTJkLWIyNmYtNDg0Yi04NDI3LWQxY2I0ZjBjNjQ2ZCIsImJpVG9rZW4iOiI0YThkOTFmNS0wOTc0LTAwMzEtMTg1Zi1lYzY5MTI5MDM0NjYiLCJzaXRlT3duZXJJZCI6ImJkMjBhYzFlLWU2YTktNGE2My05MTM2LWE4M2Y3YzhlM2Y2MyJ9%26compId%3Dcomp-k6d5zupa%26url%3Dhttps%3A%2F%2Fdocs.wixstatic.com%2Fugd%2Fbd20ac_2d3bd44ebe59416d9e2f967b4bf04381.pdf#page=1&links=true&originalFileName=MENTX&locale=en&allowDownload=false&allowPrinting=false"));
+        QDesktopServices::openUrl(QUrl("https://is.gd/9xtTXK"));
 }
 
 void BitcoinGUI::roadmapActionClicked()
