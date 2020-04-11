@@ -193,6 +193,12 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     rpcConsole = new RPCConsole(this);
     connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole, SLOT(show()));
 
+    connect(openInfoAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showInfo()));
+    connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showConsole()));
+    connect(openNetworkAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showNetwork()));
+    connect(openPeersAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showPeers()));
+    connect(openConfEditorAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showConfEditor()));
+
     // Clicking on "Verify Message" in the address book sends you to the verify message tab
     connect(addressBookPage, SIGNAL(verifyMessage(QString)), this, SLOT(gotoVerifyMessageTab(QString)));
     // Clicking on "Sign Message" in the receive coins page sends you to the sign message tab
@@ -283,6 +289,30 @@ void BitcoinGUI::createActions()
     signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message..."), this);
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
 
+    twitterAction = new QAction(QIcon(":/icons/twitter"), tr("Twitter"), this);
+    twitterAction->setToolTip(tr("MentX Twitter"));
+    discordAction = new QAction(QIcon(":/icons/discord"), tr("Discord"), this);
+    discordAction->setToolTip(tr("MentX Discord"));
+    youtubeAction = new QAction(QIcon(":/icons/youtube"), tr("Youtube"), this);
+    youtubeAction->setToolTip(tr("MentX Youtube"));
+    telegramAction = new QAction(QIcon(":/icons/telegram"), tr("Telegram"), this);
+    telegramAction->setToolTip(tr("MentX Telegram"));
+    redditAction = new QAction(QIcon(":/icons/reddit"), tr("Reddit"), this);
+    redditAction->setToolTip(tr("MentX Reddit"));
+    
+    websiteAction = new QAction(QIcon(":/icons/website"), tr("Website"), this);
+    websiteAction->setToolTip(tr("MentX Website"));
+    blockexplorerAction = new QAction(QIcon(":/icons/blockexplorer"), tr("Block Explorer"), this);
+    blockexplorerAction->setToolTip(tr("MentX Block Explorer"));
+    paperwalletAction = new QAction(QIcon(":/icons/paperwallet"), tr("Paper Wallet"), this);
+    paperwalletAction->setToolTip(tr("MentX Paper Wallet"));
+    githubsourceAction = new QAction(QIcon(":/icons/githubsource"), tr("Github Source"), this);
+    githubsourceAction->setToolTip(tr("MentX Github Source"));
+    whitepaperAction = new QAction(QIcon(":/icons/whitepaper"), tr("White Paper"), this);
+    whitepaperAction->setToolTip(tr("MentX White Paper"));
+    roadmapAction = new QAction(QIcon(":/icons/roadmap"), tr("Road Map"), this);
+    roadmapAction->setToolTip(tr("MentX Road Map"));
+
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
@@ -300,6 +330,25 @@ void BitcoinGUI::createActions()
     connect(lockWalletAction, SIGNAL(triggered()), this, SLOT(lockWallet()));
     connect(signMessageAction, SIGNAL(triggered()), this, SLOT(gotoSignMessageTab()));
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
+
+    connect(twitterAction, SIGNAL(triggered()), this, SLOT(twitterActionClicked()));
+    connect(discordAction, SIGNAL(triggered()), this, SLOT(discordActionClicked()));
+    connect(telegramAction, SIGNAL(triggered()), this, SLOT(telegramActionClicked()));
+    connect(youtubeAction, SIGNAL(triggered()), this, SLOT(youtubeActionClicked()));
+    connect(redditAction, SIGNAL(triggered()), this, SLOT(redditActionClicked()));
+    
+    connect(websiteAction, SIGNAL(triggered()), this, SLOT(websiteActionClicked()));
+    connect(blockexplorerAction, SIGNAL(triggered()), this, SLOT(blockexplorerActionClicked()));
+    connect(paperwalletAction, SIGNAL(triggered()), this, SLOT(paperwalletActionClicked()));
+    connect(githubsourceAction, SIGNAL(triggered()), this, SLOT(githubsourceActionClicked()));
+    connect(whitepaperAction, SIGNAL(triggered()), this, SLOT(whitepaperActionClicked()));
+    connect(roadmapAction, SIGNAL(triggered()), this, SLOT(roadmapActionClicked()));
+
+    connect(openInfoAction, SIGNAL(triggered()), this, SLOT(showInfo()));
+    connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showConsole()));
+    connect(openNetworkAction, SIGNAL(triggered()), this, SLOT(showNetwork()));
+    connect(openPeersAction, SIGNAL(triggered()), this, SLOT(showPeers()));
+    connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
 }
 
 void BitcoinGUI::createMenuBar()
@@ -328,6 +377,29 @@ void BitcoinGUI::createMenuBar()
     settings->addAction(lockWalletAction);
     settings->addSeparator();
     settings->addAction(optionsAction);
+
+    QMenu *socials = appMenuBar->addMenu(tr("Social"));
+    socials->addAction(twitterAction);
+    socials->addAction(discordAction);
+    socials->addAction(telegramAction);
+    socials->addAction(youtubeAction);
+    socials->addAction(redditAction);
+    
+    QMenu *links = appMenuBar->addMenu(tr("Links"));
+    links->addAction(websiteAction);
+    links->addAction(blockexplorerAction);
+    links->addAction(paperwalletAction);
+    links->addAction(githubsourceAction);
+    links->addAction(whitepaperAction);
+    links->addAction(roadmapAction);
+
+    QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
+    tools->addAction(openInfoAction);
+    tools->addAction(openRPCConsoleAction);
+    tools->addAction(openNetworkAction);
+    tools->addAction(openPeersAction);
+    tools->addSeparator();
+    tools->addAction(openConfEditorAction);
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);
@@ -451,6 +523,10 @@ void BitcoinGUI::createTrayIcon()
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(optionsAction);
     trayIconMenu->addAction(openRPCConsoleAction);
+    trayIconMenu->addAction(openNetworkAction);
+    trayIconMenu->addAction(openPeersAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(openConfEditorAction);
 #ifndef Q_OS_MAC // This is built-in on Mac
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
@@ -484,6 +560,57 @@ void BitcoinGUI::aboutClicked()
     AboutDialog dlg;
     dlg.setModel(clientModel);
     dlg.exec();
+}
+
+void BitcoinGUI::twitterActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://twitter.com/"));
+}
+void BitcoinGUI::discordActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://discord.gg/Xe9JgVM"));
+}
+void BitcoinGUI::telegramActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://t.me/"));
+}
+void BitcoinGUI::youtubeActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://www.youtube.com/channel/UCgGVONzUfYSEz7Z-6O9XBpQ"));
+}
+void BitcoinGUI::redditActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://www.reddit.com/r/MentX/"));
+}
+
+void BitcoinGUI::websiteActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://www.primestyleltd.com/mentx"));
+}
+
+void BitcoinGUI::blockexplorerActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://mentx.freakhouse.dev"));
+}
+
+void BitcoinGUI::paperwalletActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://paperwallet.freakhouse.dev/?currency=Mentx"));
+}
+
+void BitcoinGUI::githubsourceActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://github.com/freakcoderz/mentx"));
+}
+
+void BitcoinGUI::whitepaperActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://wixlabs-pdf-dev.appspot.com/assets/pdfjs/web/viewer.html?file=%2Fpdfproxy%3Finstance%3DNp2mtlEkOQdAs0E5KvMAbs27yQRZvMIEpcKWorC1XZI.eyJpbnN0YW5jZUlkIjoiMjlhZTljNDUtNWM3YS00NTMwLWIzMmItOWQ1YzQ5NzM5MGFjIiwiYXBwRGVmSWQiOiIxM2VlMTBhMy1lY2I5LTdlZmYtNDI5OC1kMmY5ZjM0YWNmMGQiLCJtZXRhU2l0ZUlkIjoiNjMyMzBkYjAtNTUwZS00NTAxLWFiNzQtNzEzNTViZTNhNGNhIiwic2lnbkRhdGUiOiIyMDIwLTA0LTExVDAzOjE4OjA5LjkyMVoiLCJkZW1vTW9kZSI6ZmFsc2UsImFpZCI6ImY5YjhkNTJkLWIyNmYtNDg0Yi04NDI3LWQxY2I0ZjBjNjQ2ZCIsImJpVG9rZW4iOiI0YThkOTFmNS0wOTc0LTAwMzEtMTg1Zi1lYzY5MTI5MDM0NjYiLCJzaXRlT3duZXJJZCI6ImJkMjBhYzFlLWU2YTktNGE2My05MTM2LWE4M2Y3YzhlM2Y2MyJ9%26compId%3Dcomp-k6d5zupa%26url%3Dhttps%3A%2F%2Fdocs.wixstatic.com%2Fugd%2Fbd20ac_2d3bd44ebe59416d9e2f967b4bf04381.pdf#page=1&links=true&originalFileName=MENTX&locale=en&allowDownload=false&allowPrinting=false"));
+}
+
+void BitcoinGUI::roadmapActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://bitcoingarden.org/forum/index.php?topic=88164.msg507820;topicseen#msg507820"));
 }
 
 void BitcoinGUI::setNumConnections(int count)
