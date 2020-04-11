@@ -346,9 +346,6 @@ void BitcoinGUI::createActions()
 
     connect(openInfoAction, SIGNAL(triggered()), this, SLOT(showInfo()));
     connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showConsole()));
-    connect(openNetworkAction, SIGNAL(triggered()), this, SLOT(showNetwork()));
-    connect(openPeersAction, SIGNAL(triggered()), this, SLOT(showPeers()));
-    connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
 }
 
 void BitcoinGUI::createMenuBar()
