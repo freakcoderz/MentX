@@ -393,14 +393,6 @@ void BitcoinGUI::createMenuBar()
     links->addAction(whitepaperAction);
     links->addAction(roadmapAction);
 
-    QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
-    tools->addAction(openInfoAction);
-    tools->addAction(openRPCConsoleAction);
-    tools->addAction(openNetworkAction);
-    tools->addAction(openPeersAction);
-    tools->addSeparator();
-    tools->addAction(openConfEditorAction);
-
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);
     help->addSeparator();
