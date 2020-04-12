@@ -337,9 +337,6 @@ void BitcoinGUI::createActions()
     connect(githubsourceAction, SIGNAL(triggered()), this, SLOT(githubsourceActionClicked()));
     connect(whitepaperAction, SIGNAL(triggered()), this, SLOT(whitepaperActionClicked()));
     connect(roadmapAction, SIGNAL(triggered()), this, SLOT(roadmapActionClicked()));
-
-    connect(openInfoAction, SIGNAL(triggered()), this, SLOT(showInfo()));
-    connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showConsole()));
 }
 
 void BitcoinGUI::createMenuBar()
@@ -543,7 +540,7 @@ void BitcoinGUI::aboutClicked()
 
 void BitcoinGUI::twitterActionClicked()
 {
-        QDesktopServices::openUrl(QUrl("https://twitter.com/"));
+        QDesktopServices::openUrl(QUrl("https://twitter.com/MentX_MentX?s=09"));
 }
 void BitcoinGUI::discordActionClicked()
 {
@@ -551,7 +548,7 @@ void BitcoinGUI::discordActionClicked()
 }
 void BitcoinGUI::telegramActionClicked()
 {
-        QDesktopServices::openUrl(QUrl("https://t.me/"));
+        QDesktopServices::openUrl(QUrl("https://t.me/mentxofficial"));
 }
 void BitcoinGUI::youtubeActionClicked()
 {
