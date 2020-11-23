@@ -1,11 +1,72 @@
-MentX Core integration/staging tree
+### MentX 
+
+<img src="https://mentx.freakhouse.dev/images/logo.png">
+
+## Important Links
+
+  * Block explorer https://mentx.freakhouse.dev
+  * Website https://www.primestyleltd.com/mentx
+  * Paper Wallet https://paperwallet.freakhouse.dev/?currency=MentX
+  * Twitter https://twitter.com/MentX_MentX
+  * Discord channel https://discordapp.com/invite/98eWYj2
+  * Reddit https://www.reddit.com/r/MentX/
+  * Telegram https://t.me/mentx_official
+
+## MentX Specifications
+
+```
+Name: MentX
+Ticker: MENTX
+Maturity: 6 Blocks
+POW Algo: Scrypt
+POS: 33% APR
+Rpcport: 14111  
+Max Supply: 333.000.000
+
+```
+
+## Docker
+[Instructions for installing docker](https://www.docker.com/community-edition).
+
+First, build the image.
+```
+# go to the same directory Dockerfile exists
+docker build .
+```
+
+You should see logs similar to below. This takes a while, as it is provisioning the image by installing dependencies and building the MentX binary.
+```
+Sending build context to Docker daemon  156.4MB
+
+Step 1/12 : FROM ubuntu:16.04
+
+..............
+
+Removing intermediate container 20bf170af587
+
+Successfully built 347a6416af66
+```
+
+Then, copy the unique identifier built by Docker (in this case, `347a6416af66`).
+```
+➜  MentX git:(master) ✗ docker run -d 347a6416af66
+46ecdf76b5b7ead9271ba5f313b03f2cf8002489f11c1de17e495767da3adebf
+```
+
+This runs the binary, `MentXd`, with no command arguments.
+
+`-d`: daemonize the container. Run `docker logs 347a6416af66 -f` to tail the standard output.
+
+`-v`: persist the data in your host machine. Example: `docker run -d -v $(pwd)/docker/data:/root/.MentX/ 347a6416af66`
+
+## MentX Core integration/staging tree
 =====================================
 
 Copyright (c) 2009-2020 Bitcoin Developers  
 Copyright (c) 2019-2020 Mentos Developers 
 Copyright (c) 2020- MentX Developers
 
-What is MentX?
+## What is MentX?
 ----------------
 
 MentX is an experimental new digital currency that enables instant payments to
@@ -18,13 +79,13 @@ MentX first started in February 2020 using a variant of Litecoin using Scrypt as
 the Proof-of-Work (PoW) hash algorithm. After the initial premine was done, the chain
 quickly moved to Proof-of-Stake (PoS) mining.
 
-License
+## License
 -------
 
 MentX is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see http://opensource.org/licenses/MIT.
 
-Development process
+## Development process
 -------------------
 
 Developers work in their own trees, then submit pull requests when they think
@@ -45,7 +106,7 @@ The `master` branch is regularly built and tested, but is not guaranteed to be
 completely stable. [Tags](https://github.com/freakcoderz/mentx/tags) are created
 regularly to indicate new official, stable release versions of Bitcoin.
 
-Testing
+## Testing
 -------
 
 Testing and code review is the bottleneck for development; we get more pull
