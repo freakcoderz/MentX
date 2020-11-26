@@ -34,8 +34,8 @@ RUN apt-get install -y git \
             libdb++-dev \
             libboost-all-dev \
             libqrencode-dev \
-            aptitude && aptitude install -y miniupnpc \
-                                 libminiupnpc-dev
+            libminiupnpc-dev \
+            miniupnpc
 
 # ===============================================================================
 # Set working directory
@@ -63,3 +63,5 @@ RUN cd src && \
 
 # Set default CMD
 CMD /work/src/MentXd && tail -f -n 10 /root/.MentX/debug.log
+
+EXPOSE 14111 13111 14333 15333

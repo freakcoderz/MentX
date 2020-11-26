@@ -20,7 +20,8 @@ Ticker: MENTX
 Maturity: 6 Blocks
 POW Algo: Scrypt
 POS: 33% APR
-Rpcport: 14111  
+Rpcport: 14333
+Port: 14111  
 Max Supply: 333.000.000
 
 ```
@@ -30,8 +31,13 @@ Max Supply: 333.000.000
 
 First, build the image.
 ```
+# Git clone this repo
+https://github.com/freakcoderz/MentX.git
+
 # go to the same directory Dockerfile exists
-docker build .
+cd MentX
+# Build the container and tag it with a usable name + version
+docker build -t mentxd:v1.0.0 .
 ```
 
 You should see logs similar to below. This takes a while, as it is provisioning the image by installing dependencies and building the MentX binary.
@@ -45,11 +51,12 @@ Step 1/12 : FROM ubuntu:16.04
 Removing intermediate container 20bf170af587
 
 Successfully built 347a6416af66
+Successfully built mentxd:v1.0.0
 ```
 
 Then, copy the unique identifier built by Docker (in this case, `347a6416af66`).
 ```
-➜  MentX git:(master) ✗ docker run -d 347a6416af66
+➜  MentX git:(master) ✗ docker run -d mentxd:v1.0.0
 46ecdf76b5b7ead9271ba5f313b03f2cf8002489f11c1de17e495767da3adebf
 ```
 
@@ -57,7 +64,7 @@ This runs the binary, `MentXd`, with no command arguments.
 
 `-d`: daemonize the container. Run `docker logs 347a6416af66 -f` to tail the standard output.
 
-`-v`: persist the data in your host machine. Example: `docker run -d -v $(pwd)/docker/data:/root/.MentX/ 347a6416af66`
+`-v`: persist the data in your host machine. Example: `docker run -d -v $(pwd)/docker/data:/root/.MentX/ mentxd:v1.0.0`
 
 ## MentX Core integration/staging tree
 =====================================
